@@ -1,0 +1,68 @@
+ext {
+    minSdkVersion = 26
+    targetSdkVersion = 30
+    compileSdkVersion = 30
+    buildToolsVersion = "30.0.3"
+
+
+    version = [
+            hilt                    : "2.40.1",
+            kotlin                  : "1.4.3",
+            javaInjectVersion       : "1",
+            moshiVersion            : "2.9.0",
+            moshiKotlin             : "1.12.0",
+            glide                   : "4.13.0",
+            lifecycle               : "2.2.0",
+            coreTesting             : "2.1.0",
+            mockk                   : "1.12.0",
+            json                    :  "2.8.7",
+            nav_version             : "2.2.0-beta01",
+            map_version             : "6.1.10"
+    ]
+
+    dependenciesList = [
+            // hilt
+            hiltAndroid                 : "com.google.dagger:hilt-android:$version.hilt",
+            hiltCompiler                : "com.google.dagger:hilt-android-compiler:$version.hilt",
+            javaInject                  : "javax.inject:javax.inject:$version.javaInjectVersion",
+
+            // coroutine
+            coroutineTest               : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version.kotlin",
+            coroutineAndroid            : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version.kotlin",
+
+            // network
+            moshiRetrofit               : "com.squareup.retrofit2:converter-moshi:$version.moshiVersion",
+            moshiKotlin                 : "com.squareup.moshi:moshi-kotlin:$version.moshiKotlin",
+            glide                       : "com.github.bumptech.glide:glide:$version.glide",
+            coroutine                   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version.kotlin",
+            okhttpInterceptor           : 'com.squareup.okhttp3:logging-interceptor:3.14.9',
+
+            // test
+            coreTesting                 : "androidx.arch.core:core-testing:$version.coreTesting",
+            mockk                       : "io.mockk:mockk:$version.mockk",
+            junit                       : "'junit:junit:4.+",
+
+            // Android platform
+            lifecycleViewModel          : "androidx.lifecycle:lifecycle-viewmodel-ktx:$version.lifecycle",
+            appCompat                   : 'androidx.appcompat:appcompat:1.1.0',
+            material                    : 'com.google.android.material:material:1.1.0',
+            constraintlayout            : 'androidx.constraintlayout:constraintlayout:2.1.0',
+            lifecycleLiveData           : 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0',
+            lifecycleExtension          : 'androidx.lifecycle:lifecycle-extensions:2.2.0',
+            multidex                    : 'androidx.multidex:multidex:2.0.1',
+            anddroidLegacy              : 'androidx.legacy:legacy-support-v4:1.0.0',
+
+            // kotlin
+            kotlinKTX                   : 'androidx.core:core-ktx:1.6.0',
+            kotlinStdlib                : "org.jetbrains.kotlin:kotlin-stdlib:$version.kotlin",
+
+            //Json
+            json                        : "com.google.code.gson:gson:$version.json",
+
+            //Navigation
+            navigation                  : "androidx.navigation:navigation-fragment-ktx:$version.nav_version",
+            navigation_ktx              : "androidx.navigation:navigation-ui-ktx:$version.nav_version"
+
+
+    ]
+}

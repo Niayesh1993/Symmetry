@@ -1,0 +1,5 @@
+rootProject.name = "Symmetry"
+include ':app'
+include ':domain'
+include ':data'
+include ':ui'
