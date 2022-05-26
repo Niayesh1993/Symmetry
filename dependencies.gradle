@@ -64,5 +64,6 @@ ext {
             navigation_ktx              : "androidx.navigation:navigation-ui-ktx:$version.nav_version"
 
 
+
     ]
 }
