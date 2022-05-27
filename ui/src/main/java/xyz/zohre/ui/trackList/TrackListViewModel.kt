@@ -25,13 +25,11 @@ class TrackListViewModel@Inject constructor(
 
     val tracks: MutableState<List<Sessions>> = mutableStateOf(ArrayList())
 
-    private val _loadingState = MutableStateFlow(true)
-    val loadingState: StateFlow<Boolean> = _loadingState
-
     private val _errorState = MutableStateFlow("")
     val errorState: StateFlow<String> = _errorState
 
     val query = mutableStateOf("")
+
     val loading = mutableStateOf(false)
 
     val page = mutableStateOf(1)
@@ -53,8 +51,9 @@ class TrackListViewModel@Inject constructor(
 
     fun searchTracks(query: String) {
         loading.value = true
+        resetSearchState()
         viewModelScope.launch {
-            trackListRepository.execute(Any()).collectLatest {
+            trackSearchRepository.execute(Any()).collectLatest {
                 showResult(it)
             }
         }
@@ -63,16 +62,14 @@ class TrackListViewModel@Inject constructor(
     private fun showResult(result: ApiResult<TrackResponse>) {
         when (result) {
             is ApiResult.Loading -> {
-                _loadingState.value = true
+                loading.value = true
             }
             is ApiResult.Success -> {
                 loading.value = false
-                _loadingState.value = false
-                appendRecipes(result.data.data.sessions)
+                appendTracks(result.data.data.sessions)
             }
             is ApiResult.Error -> {
                 loading.value = false
-                _loadingState.value = false
                 _errorState.value = result.exception.message.toString()
             }
         }
@@ -82,18 +79,52 @@ class TrackListViewModel@Inject constructor(
     /**
      * Append new tracks to the current list of recipes
      */
-    private fun appendRecipes(sessions: List<Sessions>){
+    private fun appendTracks(sessions: List<Sessions>){
         val current = ArrayList(tracks.value)
         current.addAll(sessions)
         tracks.value = current
     }
 
+    /**
+     * Called when a new search is executed.
+     */
+    private fun resetSearchState() {
+        tracks.value = listOf()
+        page.value = 1
+        onChangeRecipeScrollPosition(0)
+    }
+
+    fun nextPage(){
+        // prevent duplicate event due to recompose happening to quickly
+        if((recipeListScrollPosition + 1) >= (page.value * tracks.value.size/2) ){
+            loading.value = true
+            incrementPage()
+
+            if(page.value > 1){
+                loadTracks()
+            }
+            loading.value = false
+        }
+    }
+
     fun onQueryChanged(query: String) {
+        if(query.isNullOrEmpty()) {
+            resetSearchState()
+            loadTracks()
+        }
         setQuery(query)
     }
 
     private fun setQuery(query: String){
         this.query.value = query
+    }
+
+    private fun incrementPage(){
+        setPage(page.value + 1)
+    }
+
+    private fun setPage(page: Int){
+        this.page.value = page
     }
 
     fun onChangeRecipeScrollPosition(position: Int){

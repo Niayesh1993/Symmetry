@@ -26,7 +26,7 @@ class TrackSearchRepositoryImpl@Inject constructor(
         return flow {
             // start async request so we could use network
             val remoteDeferred = CoroutineScope((ioDispatcher)).async {
-                remoteResponse = remote.getTracks()
+                remoteResponse = remote.searchTracks()
             }
             // wait for remote call to complete and emit result
             remoteDeferred.await()

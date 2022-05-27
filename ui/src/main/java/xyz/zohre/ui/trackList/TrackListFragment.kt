@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import xyz.zohre.ui.components.TrackList
 import xyz.zohre.ui.components.SearchAppBar
 import xyz.zohre.ui.components.util.SnackbarController
@@ -30,7 +31,7 @@ import xyz.zohre.ui.theme.Black1
 @AndroidEntryPoint
 class TrackListFragment: Fragment() {
 
-    private val snackbarController = SnackbarController(lifecycleScope)
+    private val snackController = SnackbarController(lifecycleScope)
 
     private val viewModel: TrackListViewModel by viewModels()
 
@@ -52,14 +53,15 @@ class TrackListFragment: Fragment() {
 
                 val page = viewModel.page.value
 
+                val error = viewModel.errorState
+
                 val scaffoldState = rememberScaffoldState()
 
                 AppTheme(
                     displayProgressBar = loading,
                     scaffoldState = scaffoldState,
-                    darkTheme = false,
+                    darkTheme = true,
                 ) {
-
                     Scaffold(
                         topBar = {
                             Row(modifier = Modifier.fillMaxWidth()){
@@ -75,6 +77,13 @@ class TrackListFragment: Fragment() {
                                 onQueryChanged = viewModel::onQueryChanged,
                                 onExecuteSearch = {
                                     viewModel.searchTracks(query)
+                                    snackController.getScope().launch {
+                                        snackController.showSnackbar(
+                                            scaffoldState = scaffoldState,
+                                            message = error.value,
+                                            actionLabel = "Hide"
+                                        )
+                                    }
                                 },
                                 )
                         },
@@ -88,7 +97,7 @@ class TrackListFragment: Fragment() {
                             sessions = tracks.value,
                             onChangeScrollPosition = viewModel::onChangeRecipeScrollPosition,
                             page = page,
-                            onTriggerNextPage = { viewModel.loadTracks() }
+                            onTriggerNextPage = { viewModel.nextPage() }
                         )
                     }
                 }
