@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ShimmerRecipeCardItem(
+fun ShimmerTrackCardItem(
     colors: List<Color>,
     xShimmer: Float,
     yShimmer: Float,

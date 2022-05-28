@@ -21,38 +21,21 @@ val QuickSandTypography = Typography(
     h1 = TextStyle(
         fontFamily = QuickSand,
         fontWeight = FontWeight.W500,
-        fontSize = 30.sp,
-    ),
-    h2 = TextStyle(
-        fontFamily = QuickSand,
-        fontWeight = FontWeight.W500,
-        fontSize = 24.sp,
-    ),
-    h3 = TextStyle(
-        fontFamily = QuickSand,
-        fontWeight = FontWeight.W500,
-        fontSize = 20.sp,
-    ),
-    h4 = TextStyle(
-        fontFamily = QuickSand,
-        fontWeight = FontWeight.W400,
-        fontSize = 18.sp,
+        fontSize = 34.sp,
+        color = Color.White
     ),
     h5 = TextStyle(
         fontFamily = QuickSand,
         fontWeight = FontWeight.W400,
         fontSize = 16.sp,
+        color = Color.White
     ),
     h6 = TextStyle(
         fontFamily = QuickSand,
         fontWeight = FontWeight.W400,
         fontSize = 14.sp,
     ),
-    subtitle1 = TextStyle(
-        fontFamily = QuickSand,
-        fontWeight = FontWeight.W500,
-        fontSize = 16.sp,
-    ),
+
     subtitle2 = TextStyle(
         fontFamily = QuickSand,
         fontWeight = FontWeight.W400,
@@ -65,22 +48,13 @@ val QuickSandTypography = Typography(
     ),
     body2 = TextStyle(
         fontFamily = QuickSand,
-        fontSize = 14.sp
-    ),
-    button = TextStyle(
-        fontFamily = QuickSand,
-        fontWeight = FontWeight.W400,
-        fontSize = 15.sp,
-        color = Color.White
+        fontSize = 13.sp,
+        color = Color.Black
     ),
     caption = TextStyle(
         fontFamily = QuickSand,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
-    ),
-    overline = TextStyle(
-        fontFamily = QuickSand,
-        fontWeight = FontWeight.W400,
-        fontSize = 12.sp
+        fontSize = 12.sp,
+        color = Color.White
     )
 )

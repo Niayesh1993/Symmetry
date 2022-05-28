@@ -2,16 +2,14 @@ package xyz.zohre.ui.theme
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import xyz.zohre.ui.components.CircularIndeterminateProgressBar
-import xyz.zohre.ui.components.DefaultSnackbar
+import xyz.zohre.ui.components.DefaultSnackBar
 
 private val LightThemeColors = lightColors(
     primary = Blue600,
@@ -61,8 +59,8 @@ fun AppTheme(
         ){
             content()
             CircularIndeterminateProgressBar(isDisplayed = displayProgressBar, 0.3f)
-            DefaultSnackbar(
-                snackbarHostState = scaffoldState.snackbarHostState,
+            DefaultSnackBar(
+                snackBarHostState = scaffoldState.snackbarHostState,
                 onDismiss = {
                     scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
                 },

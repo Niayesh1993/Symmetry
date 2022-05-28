@@ -32,7 +32,7 @@ fun TrackList(
     ) {
         if (loading && sessions.isEmpty()) {
             HorizontalDottedProgressBar()
-            LoadingRecipeListShimmer(imageHeight = 250.dp,)
+            LoadingTrackListShimmer(imageHeight = 250.dp,)
         }
         else if(sessions.isEmpty()){
             NothingHere()

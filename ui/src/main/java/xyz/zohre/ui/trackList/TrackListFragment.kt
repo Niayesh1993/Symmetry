@@ -20,7 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import xyz.zohre.ui.components.TrackList
 import xyz.zohre.ui.components.SearchAppBar
-import xyz.zohre.ui.components.util.SnackbarController
+import xyz.zohre.ui.components.util.SnackController
 import xyz.zohre.ui.theme.AppTheme
 import xyz.zohre.ui.theme.Black1
 
@@ -31,7 +31,7 @@ import xyz.zohre.ui.theme.Black1
 @AndroidEntryPoint
 class TrackListFragment: Fragment() {
 
-    private val snackController = SnackbarController(lifecycleScope)
+    private val snackController = SnackController(lifecycleScope)
 
     private val viewModel: TrackListViewModel by viewModels()
 

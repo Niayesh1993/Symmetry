@@ -9,13 +9,13 @@ import androidx.compose.ui.unit.dp
 
 @ExperimentalMaterialApi
 @Composable
-fun DefaultSnackbar(
-    snackbarHostState: SnackbarHostState,
+fun DefaultSnackBar(
+    snackBarHostState: SnackbarHostState,
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit?
 ) {
     SnackbarHost(
-        hostState = snackbarHostState,
+        hostState = snackBarHostState,
         snackbar = { data ->
             Snackbar(
                 modifier = Modifier.padding(16.dp),
