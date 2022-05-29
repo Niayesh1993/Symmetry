@@ -28,6 +28,8 @@ class TrackListViewModel@Inject constructor(
     private val _errorState = MutableStateFlow("")
     val errorState: StateFlow<String> = _errorState
 
+    private lateinit var sortedList: MutableList<Sessions>
+
     val query = mutableStateOf("")
 
     val loading = mutableStateOf(false)
@@ -54,9 +56,31 @@ class TrackListViewModel@Inject constructor(
         resetSearchState()
         viewModelScope.launch {
             trackSearchRepository.execute(Any()).collectLatest {
-                showResult(it)
+                sortTrackList(it, query)
             }
         }
+    }
+
+    private fun sortTrackList(result: ApiResult<TrackResponse>, query: String) {
+        when (result) {
+            is ApiResult.Loading -> {
+                loading.value = true
+            }
+            is ApiResult.Success -> {
+                loading.value = false
+                sortedList = result.data.data.sessions as MutableList<Sessions>
+                with(sortedList) { sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name.trim() }) }
+                search(query)
+            }
+            is ApiResult.Error -> {
+                loading.value = false
+                _errorState.value = result.exception.message.toString()
+            }
+        }
+    }
+
+    private fun search(query: String) {
+         appendTracks(trackSearchRepository.filterTrackList(sortedList, query))
     }
 
     private fun showResult(result: ApiResult<TrackResponse>) {

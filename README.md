@@ -105,3 +105,7 @@ It tries to check multiple cases using Mock and JUnit.
 I tried to use stubs. [Stubs do better in terms of state verification](https://martinfowler.com/articles/mocksArentStubs.html)
 , but I added Mockk for Repository test and show how we can Leverage behavior verification tools in a good way.
 
+## List & Binary Search
+
+For keeping data I prefer to use the List data structure, sort all data when receiving it, and for search choose the Binary Search
+BS can search with O(log n) in a sorted list and it has a time efficiency less than linear.
